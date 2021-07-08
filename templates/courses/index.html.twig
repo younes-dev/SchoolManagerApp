@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}Courses index{% endblock %}
+
+{% block body %}
+    {% if macros.panel_heading is defined %}
+        {{ macros.panel_heading("Cours") }}
+    {% endif %}
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CourseAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.id }}</td>
+                <td>{{ course.name }}</td>
+                <td>{{ course.courseAt ? course.courseAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('courses_show', {'id': course.id}) }}">show</a>
+                    <a href="{{ path('courses_edit', {'id': course.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('courses_new') }}">Create new</a>
+{% endblock %}

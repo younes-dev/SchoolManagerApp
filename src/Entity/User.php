@@ -254,7 +254,7 @@ class User implements UserInterface
 
     public function __toString()
     {
-        return $this->firstName .'-'. $this->lastName;
+        return $this->firstName .' '. $this->lastName;
     }
 
     public function getCne(): ?string

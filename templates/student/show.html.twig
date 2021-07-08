@@ -1,0 +1,84 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+
+{% block title %}Student{% endblock %}
+
+
+{% block body %}
+    {% if macros.panel_heading is defined %}
+        {{ macros.panel_heading("Student") }}
+    {% endif %}
+
+    <div class="container">
+        <h1>Student</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ student.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ student.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ student.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ student.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ student.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ student.password }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ student.createdAt ? student.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ student.updatedAt ? student.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ student.roles ? student.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ student.address }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ student.phone }}</td>
+            </tr>
+            <tr>
+                <th>Cne</th>
+                <td>{{ student.cne }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ student.city }}</td>
+            </tr>
+            <tr>
+                <th>CodeMassar</th>
+                <td>{{ student.codeMassar }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('student_index') }}">back to list</a>
+
+        <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
+
+        {{ include('student/_delete_form.html.twig') }}
+
+    </div>
+{% endblock %}

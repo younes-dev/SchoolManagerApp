@@ -1,0 +1,58 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+  ##########################################
+  #              mariadb Image             #
+  ##########################################
+
+  mariadb:
+    image: mariadb:10.4
+    container_name: SchoolManager-mariadb
+    working_dir: /application
+    volumes:
+      - .:/application
+      - my-data:/var/lib/mysql:rw
+      # this will run all .sh, .sql and .sql.gz files found
+      - ./Data:/docker-entrypoint-initdb.d/:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE= SchoolManager
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+    ports:
+      - "3307:3306"
+
+  ##########################################
+  #             webserver Image            #
+  ##########################################
+
+  webserver:
+    image: nginx:alpine
+    container_name: SchoolManager-webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - /application/vendor
+      - /application/var
+    ports:
+      - "8080:80"
+
+  ##########################################
+  #               php-fpm Image            #
+  ##########################################
+  php-fpm:
+    build: phpdocker/php-fpm
+    container_name: SchoolManager-php-fpm
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+      - /application/vendor
+      - /application/var
+
+volumes:
+  my-data:

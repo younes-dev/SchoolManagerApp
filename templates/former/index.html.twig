@@ -1,0 +1,69 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}Former index{% endblock %}
+
+{% block body %}
+    {% if macros.panel_heading is defined %}
+        {{ macros.panel_heading("Former") }}
+    {% endif %}
+<div class="container-fluid">
+    <h1>Former index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>Roles</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Cne</th>
+            <th>City</th>
+            <th>Matricule</th>
+            <th>TypeContrat</th>
+            <th>Grade</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for former in formers %}
+            <tr>
+                <td>{{ former.id }}</td>
+                <td>{{ former.firstName }}</td>
+                <td>{{ former.lastName }}</td>
+                <td>{{ former.username }}</td>
+                <td>{{ former.email }}</td>
+                <td>{{ former.password }}</td>
+                <td>{{ former.createdAt ? former.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ former.updatedAt ? former.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ former.roles ? former.roles|json_encode : '' }}</td>
+                <td>{{ former.address }}</td>
+                <td>{{ former.phone }}</td>
+                <td>{{ former.cne }}</td>
+                <td>{{ former.city }}</td>
+                <td>{{ former.matricule }}</td>
+                <td>{{ former.typeContrat }}</td>
+                <td>{{ former.grade }}</td>
+                <td>
+                    <a href="{{ path('former_show', {'id': former.id}) }}">show</a>
+                    <a href="{{ path('former_edit', {'id': former.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('former_new') }}">Create new</a>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+
+{% block body %}
+{% if macros.panel_heading is defined %}
+    {{ macros.panel_heading("Create new Matiere") }}
+{% endif %}
+
+<div class="container-fluid">
+    {{ include('matiere/_form.html.twig') }}
+
+    <a href="{{ path('matiere_index') }}">back to list</a>
+
+    </div>
+{% endblock %}

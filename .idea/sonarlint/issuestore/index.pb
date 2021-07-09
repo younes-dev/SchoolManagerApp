@@ -23,8 +23,6 @@ O
 templates/admin/index.html.twig,3\5\35bb2cf8eda5bf4c421c1e7e92c15c64b423733e
 P
  templates/student/show.html.twig,5\c\5cad63b5be6278fd65449fb058fb3b65f4f0a49a
-M
-templates/baseAdmin.html.twig,2\9\29b9b4514a485b80ac825ac6b2ead2f9fefe559d
 O
 templates/former/show.html.twig,8\a\8a6e9e8335ff97fcba596a5996a6c3014735ab94
 N

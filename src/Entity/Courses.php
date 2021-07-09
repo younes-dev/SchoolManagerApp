@@ -42,6 +42,11 @@ class Courses
      */
     private ?Classe $classe;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Matiere::class, inversedBy="courses")
+     */
+    private $matiere;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Courses
     public function setClasse(?Classe $classe): self
     {
         $this->classe = $classe;
+
+        return $this;
+    }
+
+    public function getMatiere(): ?Matiere
+    {
+        return $this->matiere;
+    }
+
+    public function setMatiere(?Matiere $matiere): self
+    {
+        $this->matiere = $matiere;
 
         return $this;
     }

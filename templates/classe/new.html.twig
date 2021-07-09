@@ -1,0 +1,18 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}New Classe{% endblock %}
+
+{% block body %}
+
+{% if macros.panel_heading is defined %}
+    {{ macros.panel_heading("Create new Classe") }}
+{% endif %}
+
+<div class="container-fluid">
+    {{ include('classe/_form.html.twig') }}
+
+    <a href="{{ path('classe_index') }}">back to list</a>
+
+</div>
+{% endblock %}

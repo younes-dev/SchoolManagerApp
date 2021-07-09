@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Classe;
 use App\Entity\Courses;
 use App\Entity\Former;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,10 +31,10 @@ class CoursesType extends AbstractType
             ])
 
             ->add('former')
-//            ->add('former',EntityType::class,[
-//                'class' => Former::class,
-//                'choice_label' => 'firstName',
-//            ])
+            ->add('classe',EntityType::class,[
+                'class' => Classe::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 

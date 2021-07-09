@@ -20,6 +20,15 @@
                 <td>{{ course.name }}</td>
             </tr>
             <tr>
+                <th>Class</th>
+                <td>{{ course.classe.name }}</td>
+            </tr>
+            <tr>
+                <th>Formateur</th>
+                <td>{{ course.former.firstName }} {{ course.former.lastName }}</td>
+            </tr>
+
+            <tr>
                 <th>Start</th>
                 <td>{{ course.courseAt ? course.courseAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

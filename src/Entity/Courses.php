@@ -37,6 +37,11 @@ class Courses
      */
     private $former;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classe::class, inversedBy="courses")
+     */
+    private ?Classe $classe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Courses
     public function setFormer(?Former $former): self
     {
         $this->former = $former;
+
+        return $this;
+    }
+
+    public function getClasse(): ?Classe
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classe $classe): self
+    {
+        $this->classe = $classe;
 
         return $this;
     }

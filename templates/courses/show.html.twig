@@ -20,9 +20,14 @@
                 <td>{{ course.name }}</td>
             </tr>
             <tr>
-                <th>CourseAt</th>
+                <th>Start</th>
                 <td>{{ course.courseAt ? course.courseAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ course.finishedAt ? course.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+
         </tbody>
     </table>
 

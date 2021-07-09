@@ -28,6 +28,11 @@ class Courses
     private $courseAt;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $finishedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Former::class, inversedBy="courses")
      */
     private $former;
@@ -57,6 +62,18 @@ class Courses
     public function setCourseAt($courseAt): self
     {
         $this->courseAt = $courseAt;
+
+        return $this;
+    }
+
+    public function getFinishedAt()
+    {
+        return $this->finishedAt;
+    }
+
+    public function setFinishedAt($finishedAt): self
+    {
+        $this->finishedAt = $finishedAt;
 
         return $this;
     }

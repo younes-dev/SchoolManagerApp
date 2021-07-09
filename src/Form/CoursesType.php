@@ -19,12 +19,16 @@ class CoursesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('courseAt')
             ->add('courseAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'html5' => false,
-                'attr' => ['class' => 'js-datepicker'],
+                'html5' => true,
             ])
+
+            ->add('finishedAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'html5' => true,
+            ])
+
             ->add('former')
 //            ->add('former',EntityType::class,[
 //                'class' => Former::class,

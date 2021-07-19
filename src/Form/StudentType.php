@@ -26,6 +26,7 @@ class StudentType extends AbstractType
             ->add('cne')
             ->add('city')
             ->add('codeMassar')
+            ->add('classe')
         ;
     }
 

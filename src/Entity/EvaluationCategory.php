@@ -2,46 +2,51 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
+use App\Repository\EvaluationCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=StudentRepository::class)
+ * @ORM\Entity(repositoryClass=EvaluationCategoryRepository::class)
  */
-class Student extends User
+class EvaluationCategory
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $codeMassar;
+    private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evaluation::class, mappedBy="student")
+     * @ORM\OneToMany(targetEntity=Evaluation::class, mappedBy="evaluationCategory")
      */
     private $evaluation;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Classe::class, inversedBy="students")
-     */
-    private $classe;
-
     public function __construct()
     {
-        parent::__construct();
         $this->evaluation = new ArrayCollection();
     }
 
-    public function getCodeMassar(): ?string
+    public function getId(): ?int
     {
-        return $this->codeMassar;
+        return $this->id;
     }
 
-    public function setCodeMassar(string $codeMassar): self
+    public function getType(): ?string
     {
-        $this->codeMassar = $codeMassar;
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -58,7 +63,7 @@ class Student extends User
     {
         if (!$this->evaluation->contains($evaluation)) {
             $this->evaluation[] = $evaluation;
-            $evaluation->setStudent($this);
+            $evaluation->setEvaluationCategory($this);
         }
 
         return $this;
@@ -68,23 +73,16 @@ class Student extends User
     {
         if ($this->evaluation->removeElement($evaluation)) {
             // set the owning side to null (unless already changed)
-            if ($evaluation->getStudent() === $this) {
-                $evaluation->setStudent(null);
+            if ($evaluation->getEvaluationCategory() === $this) {
+                $evaluation->setEvaluationCategory(null);
             }
         }
 
         return $this;
     }
 
-    public function getClasse(): ?Classe
+    public function __toString()
     {
-        return $this->classe;
-    }
-
-    public function setClasse(?Classe $classe): self
-    {
-        $this->classe = $classe;
-
-        return $this;
+        return $this->type;
     }
 }

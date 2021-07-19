@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}New EvaluationCategory{% endblock %}
+
+{% block body %}
+    {% if macros.panel_heading is defined %}
+        {{ macros.panel_heading("Create new EvaluationCategory") }}
+    {% endif %}
+    <div class="container">
+        {{ include('evaluation_category/_form.html.twig') }}
+
+        <a href="{{ path('evaluation_category_index') }}">back to list</a>
+    </div>
+{% endblock %}

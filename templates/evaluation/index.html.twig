@@ -1,0 +1,54 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}Evaluation index{% endblock %}
+
+{% block body %}
+
+{% if macros.panel_heading is defined %}
+    {{ macros.panel_heading("Evaluation index") }}
+{% endif %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Note</th>
+                <th>Duration</th>
+                <th>EvaluationAt</th>
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                    <th>actions</th>
+                {% endif %}
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluation in evaluations %}
+            <tr>
+                <td>{{ evaluation.id }}</td>
+                <td>{{ evaluation.note }}</td>
+                <td>{{ evaluation.duration }}</td>
+                <td>{{ evaluation.evaluationAt ? evaluation.evaluationAt|date('Y-m-d H:i:s') : '' }}</td>
+
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                    <td>
+                        <a href="{{ path('evaluation_show', {'id': evaluation.id}) }}">show</a>
+                        <a href="{{ path('evaluation_edit', {'id': evaluation.id}) }}">edit</a>
+                    </td>
+                {% endif %}
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+        <a href="{{ path('evaluation_new') }}">Create new</a>
+    {% endif %}
+
+    </div>
+{% endblock %}

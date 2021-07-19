@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+
+    {######################################################}
+    {# http://jsfiddle.net/arcreators/5g8pnp4u/5/ #}
+{#        <div class="container mt-lg-5">#}
+{#            <div class="row dot">#}
+{#                <div class="col-md-8">#}
+{#                    <form action="{{ path('app_login') }}" method="post" id="center">#}
+{#                        <div class="form-group">#}
+
+{#                            <label for="username">Username:</label>#}
+{#                            <input type="text" name="_username" class="form-control" id="username"#}
+{#                                   value="{{ last_username }}"/>#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="password">Password:</label>#}
+{#                            <input type="password" name="_password" class="form-control" id="password"/>#}
+{#                        </div>#}
+
+{#                        <input type="hidden" name="_target_path" value="{{ path('admin') }}"/>#}
+{#                        <button type="submit" class="btn btn-primary">login</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+
+    {##################################################}
+    {##################################################}
+    {#    https://jsfiddle.net/younes_dev/zsxabvmj/#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="">
+    <style>
+        .login,
+        .image {
+            min-height: 100vh;
+        }
+        .bg-image {
+            background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+            background-size: cover;
+            background-position: center center;
+        }
+        #fill {
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            background-image: url('{{ asset('assets/img/polytheck2.png') }}');
+            background-color: #004878!important;
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <!-- The image half -->
+            <div class="col-md-6 d-none d-md-flex bg-image" id="fill">
+                {#                <img src="{{ asset('assets/image/BG2.png') }}" alt="">#}
+            </div>
+
+
+            <!-- The content half -->
+            <div class="col-md-6 bg-light">
+                <div class="login d-flex align-items-center py-5">
+
+                    <!-- Demo content-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                <h3 class="display-4">Login</h3>
+                                <p class="text-muted mb-4 ml-5"></p>
+                                <form action="{{ path('app_login') }}" method="post" id="center">
+                                    <div class="form-group mb-3">
+                                        <input id="username" value="{{ last_username }}" type="text" name="_username" placeholder="Email address" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <input id="password" type="password" name="_password"  placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    </div>
+                                    <input type="hidden" name="_target_path" value="{{ path('admin') }}"/>
+
+                                    <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">login</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- End -->
+
+                </div>
+            </div><!-- End -->
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

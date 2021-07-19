@@ -17,16 +17,20 @@
                 <th>LastName</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>Roles</th>
+{#                <th>Password</th>#}
+{#                <th>CreatedAt</th>#}
+{#                <th>UpdatedAt</th>#}
+{#                <th>Roles</th>#}
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Cne</th>
                 <th>City</th>
                 <th>CodeMassar</th>
-                <th>actions</th>
+                <th>Classe</th>
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                     <th>actions</th>
+                {% endif %}
+
             </tr>
             </thead>
             <tbody>
@@ -36,19 +40,23 @@
                     <td>{{ student.lastName }}</td>
                     <td>{{ student.username }}</td>
                     <td>{{ student.email }}</td>
-                    <td>{{ student.password }}</td>
-                    <td>{{ student.createdAt ? student.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ student.updatedAt ? student.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ student.roles ? student.roles|json_encode : '' }}</td>
+{#                    <td>{{ student.password }}</td>#}
+{#                    <td>{{ student.createdAt ? student.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                    <td>{{ student.updatedAt ? student.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                    <td>{{ student.roles ? student.roles|json_encode : '' }}</td>#}
                     <td>{{ student.address }}</td>
                     <td>{{ student.phone }}</td>
                     <td>{{ student.cne }}</td>
                     <td>{{ student.city }}</td>
                     <td>{{ student.codeMassar }}</td>
-                    <td>
-                        <a href="{{ path('student_show', {'id': student.id}) }}">show</a>
-                        <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
-                    </td>
+                    <td>{{ student.classe }}</td>
+
+                    {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                        <td>
+                            <a href="{{ path('student_show', {'id': student.id}) }}">show</a>
+                            <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% else %}
                 <tr>
@@ -57,8 +65,10 @@
             {% endfor %}
             </tbody>
         </table>
+        {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
 
         <a href="{{ path('student_new') }}">Create new</a>
+        {% endif %}
 
     </div>
 

@@ -2,25 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Matiere;
+use App\Entity\EvaluationCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MatiereType extends AbstractType
+class EvaluationCategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('coefficient')
+            ->add('type')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Matiere::class,
+            'data_class' => EvaluationCategory::class,
         ]);
     }
 }

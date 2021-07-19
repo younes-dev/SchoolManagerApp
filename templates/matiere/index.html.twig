@@ -14,7 +14,10 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>actions</th>
+                <th>Coefficient</th>
+                {% if (app.user.roles[0] is same as("ROLE_ADMIN")) or (app.user.roles[0] is same as("ROLE_FORMER")) %}
+                    <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -22,10 +25,13 @@
             <tr>
                 <td>{{ matiere.id }}</td>
                 <td>{{ matiere.name }}</td>
-                <td>
-                    <a href="{{ path('matiere_show', {'id': matiere.id}) }}">show</a>
-                    <a href="{{ path('matiere_edit', {'id': matiere.id}) }}">edit</a>
-                </td>
+                <td>{{ matiere.coefficient }}</td>
+                {% if (app.user.roles[0] is same as("ROLE_ADMIN")) or (app.user.roles[0] is same as("ROLE_FORMER")) %}
+                    <td>
+                        <a href="{{ path('matiere_show', {'id': matiere.id}) }}">show</a>
+                        <a href="{{ path('matiere_edit', {'id': matiere.id}) }}">edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -35,7 +41,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('matiere_new') }}">Create new</a>
+    {% if (app.user.roles[0] is same as ('ROLE_ADMIN')) or (app.user.roles[0] is same as("ROLE_FORMER")) %}
+        <a href="{{ path('matiere_new') }}">Create new</a>
+    {% endif %}
 
     </div>
 {% endblock %}

@@ -13,15 +13,15 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
+{#            <th>Id</th>#}
             <th>FirstName</th>
             <th>LastName</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Password</th>
-            <th>CreatedAt</th>
-            <th>UpdatedAt</th>
-            <th>Roles</th>
+{#            <th>Password</th>#}
+{#            <th>CreatedAt</th>#}
+{#            <th>UpdatedAt</th>#}
+{#            <th>Roles</th>#}
             <th>Address</th>
             <th>Phone</th>
             <th>Cne</th>
@@ -29,21 +29,24 @@
             <th>Matricule</th>
             <th>TypeContrat</th>
             <th>Grade</th>
+            {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
+
             <th>actions</th>
+            {% endif %}
         </tr>
         </thead>
         <tbody>
         {% for former in formers %}
             <tr>
-                <td>{{ former.id }}</td>
+{#                <td>{{ former.id }}</td>#}
                 <td>{{ former.firstName }}</td>
                 <td>{{ former.lastName }}</td>
                 <td>{{ former.username }}</td>
                 <td>{{ former.email }}</td>
-                <td>{{ former.password }}</td>
-                <td>{{ former.createdAt ? former.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ former.updatedAt ? former.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ former.roles ? former.roles|json_encode : '' }}</td>
+{#                <td>{{ former.password }}</td>#}
+{#                <td>{{ former.createdAt ? former.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                <td>{{ former.updatedAt ? former.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                <td>{{ former.roles ? former.roles|json_encode : '' }}</td>#}
                 <td>{{ former.address }}</td>
                 <td>{{ former.phone }}</td>
                 <td>{{ former.cne }}</td>
@@ -51,10 +54,12 @@
                 <td>{{ former.matricule }}</td>
                 <td>{{ former.typeContrat }}</td>
                 <td>{{ former.grade }}</td>
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
                 <td>
                     <a href="{{ path('former_show', {'id': former.id}) }}">show</a>
                     <a href="{{ path('former_edit', {'id': former.id}) }}">edit</a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -63,7 +68,10 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if app.user.roles[0] is same as("ROLE_ADMIN") %}
 
     <a href="{{ path('former_new') }}">Create new</a>
+    {% endif %}
+
 </div>
 {% endblock %}

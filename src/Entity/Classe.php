@@ -22,7 +22,7 @@ class Classe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer")
@@ -34,9 +34,15 @@ class Classe
      */
     private $courses;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="classe")
+     */
+    private $students;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->students = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,13 +94,44 @@ class Classe
 
     public function removeCourse(Courses $course): self
     {
-        if ($this->courses->removeElement($course)) {
+        if ($this->courses->removeElement($course) && $course->getClasse() === $this) {
             // set the owning side to null (unless already changed)
-            if ($course->getClasse() === $this) {
                 $course->setClasse(null);
-            }
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Student[]
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students[] = $student;
+            $student->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->removeElement($student) && $student->getClasse() === $this) {
+            // set the owning side to null (unless already changed)
+                $student->setClasse(null);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

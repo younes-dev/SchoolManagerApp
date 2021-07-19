@@ -1,0 +1,17 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import 'macros/macros_heading.html.twig' as macros %}
+
+{% block title %}Edit EvaluationCategory{% endblock %}
+
+{% block body %}
+{% if macros.panel_heading is defined %}
+    {{ macros.panel_heading("Edir Evaluation Category") }}
+{% endif %}
+<div class="container">
+    {{ include('evaluation_category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('evaluation_category_index') }}">back to list</a>
+
+    {{ include('evaluation_category/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

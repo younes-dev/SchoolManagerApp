@@ -18,7 +18,9 @@
                 <th>Formateur</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>actions</th>
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                    <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -31,10 +33,12 @@
                 <td>{{ course.former.firstName }} {{ course.former.lastName }}</td>
                 <td>{{ course.courseAt ? course.courseAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ course.finishedAt ? course.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('courses_show', {'id': course.id}) }}">show</a>
-                    <a href="{{ path('courses_edit', {'id': course.id}) }}">edit</a>
-                </td>
+                {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+                    <td>
+                        <a href="{{ path('courses_show', {'id': course.id}) }}">show</a>
+                        <a href="{{ path('courses_edit', {'id': course.id}) }}">edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -43,7 +47,8 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('courses_new') }}">Create new</a>
+    {% if app.user.roles[0] is same as("ROLE_ADMIN") or app.user.roles[0] is same as("ROLE_FORMER") %}
+        <a href="{{ path('courses_new') }}">Create new</a>
+    {% endif %}
     </div>
 {% endblock %}

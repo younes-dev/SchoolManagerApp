@@ -29,9 +29,20 @@ class Matiere
      */
     private $courses;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $coefficient;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Evaluation::class, mappedBy="matiere")
+     */
+    private $evaluation;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->evaluation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,5 +90,52 @@ class Matiere
         }
 
         return $this;
+    }
+
+    public function getCoefficient(): ?int
+    {
+        return $this->coefficient;
+    }
+
+    public function setCoefficient(int $coefficient): self
+    {
+        $this->coefficient = $coefficient;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evaluation[]
+     */
+    public function getEvaluation(): Collection
+    {
+        return $this->evaluation;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): self
+    {
+        if (!$this->evaluation->contains($evaluation)) {
+            $this->evaluation[] = $evaluation;
+            $evaluation->setMatiere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): self
+    {
+        if ($this->evaluation->removeElement($evaluation)) {
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getMatiere() === $this) {
+                $evaluation->setMatiere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
